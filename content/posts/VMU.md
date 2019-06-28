@@ -1,6 +1,8 @@
 ---
 title: "Arduino Volume Meter"
 date: 2019-06-22T00:22:03+01:00
+tags:
+  - VMU
 ---
 
 I've recently upgraded to a Audio Technica AT2020 so I can use better headphones on my home computer. Having a freestanding microphone does have its difficulties though. Keeping track of how loud I am coming through to friends is hard when I can move away from the microphone. To solve this I built an Arduino volume meter. Here I'll go over how it works.
