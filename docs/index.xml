@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Deploying Hugo with Travis CI</title>
+      <link>https://ma.xprettyjohns.com/posts/hugo-deploy-travis-releases/</link>
+      <pubDate>Sat, 29 Jun 2019 01:56:15 +0100</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/posts/hugo-deploy-travis-releases/</guid>
+      <description>This blog is built with Hugo, and I wanted a simple way to build and then deploy it with Ansible. To do this I used Travis CI, this is relatively simple, but isn&amp;rsquo;t documented very well. So Here I&amp;rsquo;ll show you how I did it.
+First up, you want a Hugo site, get started here. One simple thing that may immediately break in Travis is themes as submodules. Travis can&amp;rsquo;t deal with ssh submodules, so check your .</description>
+    </item>
+    
+    <item>
       <title>Arduino Volume Meter</title>
       <link>https://ma.xprettyjohns.com/posts/vmu/</link>
       <pubDate>Sat, 22 Jun 2019 00:22:03 +0100</pubDate>
@@ -63,6 +73,15 @@ I wanted an excuse to write some rust and the availablity of the winapi crate se
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://ma.xprettyjohns.com/projects/smbf-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SMBF Website</title>
+      <link>https://ma.xprettyjohns.com/projects/smbf-website/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/smbf-website/</guid>
       <description></description>
     </item>
     

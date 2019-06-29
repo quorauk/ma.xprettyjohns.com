@@ -3,12 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ma.xprettyjohns.com/posts/hugo-deploy-travis-releases/</loc>
+    <lastmod>2019-06-29T01:56:15+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/posts/</loc>
+    <lastmod>2019-06-29T01:56:15+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ma.xprettyjohns.com/posts/vmu/</loc>
     <lastmod>2019-06-22T00:22:03+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ma.xprettyjohns.com/posts/</loc>
+    <loc>https://ma.xprettyjohns.com/tags/</loc>
+    <lastmod>2019-06-22T00:22:03+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/vmu/</loc>
     <lastmod>2019-06-22T00:22:03+01:00</lastmod>
     <priority>0</priority>
   </url>
@@ -49,8 +66,7 @@
   </url>
   
   <url>
-    <loc>https://ma.xprettyjohns.com/tags/</loc>
-    <priority>0</priority>
+    <loc>https://ma.xprettyjohns.com/projects/smbf-website/</loc>
   </url>
   
   <url>

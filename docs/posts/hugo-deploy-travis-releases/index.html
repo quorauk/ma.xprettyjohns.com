@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Homepage for Max Prettyjohns.">
+    <link href="https://ma.xprettyjohns.com/css/mystyles.css" type="text/css" rel="stylesheet"></link>
+    <title>Max Prettyjohns</title>
+</head>
+<body><header>
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/">Max Prettyjohns</a>
+          <a role="button" aria-label="burger menu" id="nav-toggle" class="navbar-burger burger" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <script type="text/javascript">
+            document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+            function toggleNav() {
+              var nav = document.getElementById("nav-menu");
+              var className = nav.getAttribute("class");
+              if(className == "nav-right nav-menu") {
+                  nav.className = "navbar-menu";
+              } else {
+                  nav.className = "nav-right nav-menu";
+              }
+            }
+          </script>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/posts">Posts</a>
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/projects">Projects</a>
+        </div>
+      </div>
+    </nav>
+</header>
+<div id="content">
+<div class="section">
+  <h2 class="title is-2">Deploying Hugo with Travis CI</h3>
+  <span>2019-06-29 | <a href="https://ma.xprettyjohns.com/posts/hugo-deploy-travis-releases/">permalink</a></span>
+  <article class="section">
+  <p>This blog is built with Hugo, and I wanted a simple way to build and then deploy it with Ansible. To do this I used Travis CI, this is relatively simple, but isn&rsquo;t documented very well. So Here I&rsquo;ll show you how I did it.</p>
+
+<p>First up, you want a Hugo site, get started <a href="https://gohugo.io">here</a>. One simple thing that may immediately break in Travis is themes as submodules. Travis can&rsquo;t deal with ssh submodules, so check your .gitmodules file for ssh urls, and replace them with https if possible.</p>
+
+<p>Next, you will want to setup your build and package pipeline. I like using a Makefile for this, but feel free to use what you are comfortable with.</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> build
+
+<span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+		rm -rf public
+
+<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> clean
+		hugo -b https://ma.xprettyjohns.com/
+
+<span style="color:#a6e22e">package</span><span style="color:#f92672">:</span> build
+		tar -czf ma.xprettyjohns.com.tgz public
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>Essentially, the makefile will build the static hugo files to the ./public directory, then the package it into a tgz file for deployment. Now we need to get TravisCI to run this Makefile as part of the CI process. Create the following travis.yml file in the root of your repository.</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: go
+install:
+- mkdir -p $HOME/bin
+- wget https://github.com/gohugoio/hugo/releases/download/v0.<span style="color:#ae81ff">55.6</span>/hugo_0.<span style="color:#ae81ff">55.</span>6_Linux-64bit.tar.gz
+  -O /tmp/hugo.tar.gz
+- tar -xzf /tmp/hugo.tar.gz -C $HOME/bin/
+- export PATH=$PATH:$HOME/bin
+script: make package</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>This downloads the Hugo binary, adds it to the path, and then runs the Makefile package script. Now we want to set up deployment.</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># install travis cli</span>
+gem install travis
+<span style="color:#75715e"># login to travisci.com</span>
+travis login --pro
+<span style="color:#75715e"># setup releases, follow the instructions</span>
+travis setup releases -r quorauk/ma.xprettyjohns.com --pro</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>The last step is setting deploy.skip_cleanup: true, so that your deployment artifact isn&rsquo;t deleted before the deployment step. Set the branch you want to deploy from (probably master), and set on.tags: true. Your final travis.yml should look like this.</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: go
+install:
+- mkdir -p $HOME/bin
+- wget https://github.com/gohugoio/hugo/releases/download/v0.<span style="color:#ae81ff">55.6</span>/hugo_0.<span style="color:#ae81ff">55.</span>6_Linux-64bit.tar.gz
+  -O /tmp/hugo.tar.gz
+- tar -xzf /tmp/hugo.tar.gz -C $HOME/bin/
+- export PATH=$PATH:$HOME/bin
+script: make package
+deploy:
+  provider: releases
+  api_key:
+    secure: J1eoJrlUvDICgDDHa6jefQnsftDUFwRecIlieFvcllamm5ornBMzvz9tNXW4Ro2msDFtHZzVVPY08s3DVs5xjWvnp8We5qiUv4AT0kydSRfqmUfN7yuj5F+OrY5lpyCuJzBQ3yeHVqbr3EUnFtOdaKRRYEZmQgVZLR5EHn6tC1iQBrgwU1F2c+y8tFCDwLvj+osXarcn9Jxbo30FHEMgT6wIvgi/rqMszoGmtM76n62iHbrkTP8S35DYPzMVc6DG4GvS+K2FVbj4L4UUmR4dcn83/yfJehSnsDVZ8/Clc0p1A/JC7FRwzEFJ6p7hWRFg9HKo4+Rg9JWHpAwQmzwEaRngh7e2FFGu/SFrLkp35OitUPyK7308okJPQw+rol3ex4qV/tPAEVxAGh1potH1opqEg6rnpIpTWQ1Uxaxccm31OArzof9P96VoY8HK9xaP7ohrb+eSekmp9ZJyb7TDiYlgnyH1KdryYlRn34Z0jMqnLOwmo8ajimN6GiwMOy8Ng5w/ac5vjpirps8Ky4MRTA99KgPlXExgzh2YMD1XzAn7ovsgCreqBBSTaVzFeLm9DdkGVXnO6yciqUk3E7WPWgGx6OfnEpDc0xz1YWfWuz6RDPDK/83OMk/9znZA7u91Tj41qDybK7nfg+Y2ZA06doULFnZgaPq7Xv6/D5OEHMk=
+  file: ma.xprettyjohns.com.tgz
+  skip_cleanup: <span style="color:#66d9ef">true</span>
+  on:
+    repo: quorauk/ma.xprettyjohns.com
+    tags: <span style="color:#66d9ef">true</span>
+    branch: master</code></pre></td></tr></table>
+</div>
+</div>
+
+  </article>
+</div>
+
+      </div><footer class="footer">
+  <div class="content has-text-centered">
+    <a href="https://github.com/quorauk">Github</a>
+    <a href="https://www.linkedin.com/in/quorauk/">Linkedin</a>
+    |
+    Max Prettyjohns 2019
+    |
+    <a href="https://github.com/quorauk/terminal-dreams">Theme</a>
+  </div>
+</footer>
+</body>
+</html>
