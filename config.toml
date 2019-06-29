@@ -2,3 +2,7 @@ baseURL = "https://ma.xprettyjohns.com/"
 languageCode = "en-gb"
 title = "Max Prettyjohns"
 theme = "terminal-dreams"
+enableRobotsTXT = true
+canonifyURLs = true
+[params]
+  author = "Max Prettyjohns"
