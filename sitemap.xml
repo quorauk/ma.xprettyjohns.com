@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/posts/vmu/</loc>
+    <lastmod>2019-06-22T00:22:03+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/posts/</loc>
+    <lastmod>2019-06-22T00:22:03+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/</loc>
+    <lastmod>2019-06-21T19:59:53+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/cholibot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/discord-bot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/dmux/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/fgc-finder/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/smbf-api/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/projects/vmu-project/</loc>
+  </url>
+  
+</urlset>

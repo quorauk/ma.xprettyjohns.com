@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Max Prettyjohns</title>
+    <link>https://ma.xprettyjohns.com/posts/</link>
+    <description>Recent content in Posts on Max Prettyjohns</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 22 Jun 2019 00:22:03 +0100</lastBuildDate>
+    
+	<atom:link href="https://ma.xprettyjohns.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Arduino Volume Meter</title>
+      <link>https://ma.xprettyjohns.com/posts/vmu/</link>
+      <pubDate>Sat, 22 Jun 2019 00:22:03 +0100</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/posts/vmu/</guid>
+      <description>I&amp;rsquo;ve recently upgraded to a Audio Technica AT2020 so I can use better headphones on my home computer. Having a freestanding microphone does have its difficulties though. Keeping track of how loud I am coming through to friends is hard when I can move away from the microphone. To solve this I built an Arduino volume meter. Here I&amp;rsquo;ll go over how it works.
+I wanted an excuse to write some rust and the availablity of the winapi crate seemed like a good opportunity to give it go.</description>
+    </item>
+    
+  </channel>
+</rss>
