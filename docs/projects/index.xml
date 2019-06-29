@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Max Prettyjohns</title>
+    <link>https://ma.xprettyjohns.com/projects/</link>
+    <description>Recent content in Projects on Max Prettyjohns</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    
+	<atom:link href="https://ma.xprettyjohns.com/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cholibot</title>
+      <link>https://ma.xprettyjohns.com/projects/cholibot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/cholibot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Discord Bot</title>
+      <link>https://ma.xprettyjohns.com/projects/discord-bot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/discord-bot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dmux</title>
+      <link>https://ma.xprettyjohns.com/projects/dmux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/dmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FGC Finder</title>
+      <link>https://ma.xprettyjohns.com/projects/fgc-finder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/fgc-finder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SMBF API</title>
+      <link>https://ma.xprettyjohns.com/projects/smbf-api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/smbf-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VMU Project</title>
+      <link>https://ma.xprettyjohns.com/projects/vmu-project/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/projects/vmu-project/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

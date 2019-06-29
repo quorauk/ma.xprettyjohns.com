@@ -1,10 +1,10 @@
 all: build
 
 clean:
-		rm -rf public
+		rm -rf docs/*
 
 build: clean
-		hugo -b https://ma.xprettyjohns.com/
+		hugo -b https://ma.xprettyjohns.com/ -d docs
 
 package: build
 		tar -czf ma.xprettyjohns.com.tgz public

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Homepage for Max Prettyjohns.">
+    <link href="https://ma.xprettyjohns.com/css/mystyles.css" type="text/css" rel="stylesheet"></link>
+    <title>Max Prettyjohns</title>
+</head>
+<body><header>
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/">Max Prettyjohns</a>
+          <a role="button" aria-label="burger menu" id="nav-toggle" class="navbar-burger burger" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <script type="text/javascript">
+            document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+            function toggleNav() {
+              var nav = document.getElementById("nav-menu");
+              var className = nav.getAttribute("class");
+              if(className == "nav-right nav-menu") {
+                  nav.className = "navbar-menu";
+              } else {
+                  nav.className = "nav-right nav-menu";
+              }
+            }
+          </script>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/posts">Posts</a>
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/projects">Projects</a>
+        </div>
+      </div>
+    </nav>
+</header>
+<div id="content">
+    
+    
+    <div>
+  <h2 class="section title is-2">
+      <a href="https://ma.xprettyjohns.com/posts/vmu/">Arduino Volume Meter</a>
+  </h2>
+  <span class="section">2019-06-22 | <a href="https://ma.xprettyjohns.com/posts/vmu/">permalink</a></span>
+  <article class="section">
+    <p>I&rsquo;ve recently upgraded to a Audio Technica AT2020 so I can use better headphones on my home computer. Having a freestanding microphone does have its difficulties though. Keeping track of how loud I am coming through to friends is hard when I can move away from the microphone. To solve this I built an Arduino volume meter. Here I&rsquo;ll go over how it works.
+I wanted an excuse to write some rust and the availablity of the winapi crate seemed like a good opportunity to give it go.</p>
+  </article>
+</div>
+
+    
+
+      </div><footer class="footer">
+  <div class="content has-text-centered">
+    <a href="https://github.com/quorauk">Github</a>
+    <a href="https://www.linkedin.com/in/quorauk/">Linkedin</a>
+    |
+    Max Prettyjohns 2019
+    |
+    <a href="https://github.com/quorauk/terminal-dreams">Theme</a>
+  </div>
+</footer>
+</body>
+</html>

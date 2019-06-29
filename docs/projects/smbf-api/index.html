@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Homepage for Max Prettyjohns.">
+    <link href="https://ma.xprettyjohns.com/css/mystyles.css" type="text/css" rel="stylesheet"></link>
+    <title>Max Prettyjohns</title>
+</head>
+<body><header>
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/">Max Prettyjohns</a>
+          <a role="button" aria-label="burger menu" id="nav-toggle" class="navbar-burger burger" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <script type="text/javascript">
+            document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+            function toggleNav() {
+              var nav = document.getElementById("nav-menu");
+              var className = nav.getAttribute("class");
+              if(className == "nav-right nav-menu") {
+                  nav.className = "navbar-menu";
+              } else {
+                  nav.className = "nav-right nav-menu";
+              }
+            }
+          </script>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/posts">Posts</a>
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/projects">Projects</a>
+        </div>
+      </div>
+    </nav>
+</header>
+<div id="content">
+<div class="section">
+  <h2 class="title is-2">SMBF API</h3>
+  <span>0001-01-01 | <a href="https://ma.xprettyjohns.com/projects/smbf-api/">permalink</a></span>
+  <article class="section">
+  
+  </article>
+</div>
+
+      </div><footer class="footer">
+  <div class="content has-text-centered">
+    <a href="https://github.com/quorauk">Github</a>
+    <a href="https://www.linkedin.com/in/quorauk/">Linkedin</a>
+    |
+    Max Prettyjohns 2019
+    |
+    <a href="https://github.com/quorauk/terminal-dreams">Theme</a>
+  </div>
+</footer>
+</body>
+</html>
