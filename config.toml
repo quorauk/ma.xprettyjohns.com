@@ -4,5 +4,7 @@ title = "Max Prettyjohns"
 theme = "terminal-dreams"
 enableRobotsTXT = true
 canonifyURLs = true
+
 [params]
   author = "Max Prettyjohns"
+  ga_code = "UA-63824506-1"
