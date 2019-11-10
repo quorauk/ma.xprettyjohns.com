@@ -1,6 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/grpc/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/microservices/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/posts/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/tags/typescript/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ma.xprettyjohns.com/posts/typescript-grpc-service/</loc>
+    <lastmod>2019-11-10T00:28:18+00:00</lastmod>
+  </url>
   
   <url>
     <loc>https://ma.xprettyjohns.com/posts/hugo-deploy-travis-releases/</loc>
@@ -8,17 +38,7 @@
   </url>
   
   <url>
-    <loc>https://ma.xprettyjohns.com/posts/</loc>
-    <lastmod>2019-06-29T01:56:15+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ma.xprettyjohns.com/posts/vmu/</loc>
-    <lastmod>2019-06-22T00:22:03+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ma.xprettyjohns.com/tags/</loc>
     <lastmod>2019-06-22T00:22:03+01:00</lastmod>
   </url>
   

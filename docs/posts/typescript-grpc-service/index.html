@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Homepage for Max Prettyjohns.">
+    <link href="https://ma.xprettyjohns.com/css/mystyles.css" type="text/css" rel="stylesheet"></link>
+    <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ma.xprettyjohns.com\/"
+    },
+    "articleSection" : "posts",
+    "name" : "Typescript Grpc Service",
+    "headline" : "Typescript Grpc Service",
+    "description" : "This weekend I thought I would play with typescript and GRPC a little. It seems docs on getting this up and running is a bit thin on the ground, so that makes it perfect candidate for a little blog post.\nYou can find example code here\nTo get started we need to create project, do so with the following commands\n1 2 3 4  mkdir grpc-project yarn init mkdir -p src\/proto yarn add typescript ts-node grpc grpc-tools ts-protoc-gen @grpc\/proto-loader   now we will want to create a protoc service so we can do some tasty code generation, here is an example proto file to get started",
+    "inLanguage" : "en-US",
+    "author" : "Max Prettyjohns",
+    "creator" : "Max Prettyjohns",
+    "publisher": "Max Prettyjohns",
+    "accountablePerson" : "Max Prettyjohns",
+    "copyrightHolder" : "Max Prettyjohns",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-11-10 00:28:18 \x2b0000 UTC",
+    "dateModified" : "2019-11-10 00:28:18 \x2b0000 UTC",
+    "url" : "https:\/\/ma.xprettyjohns.com\/posts\/typescript-grpc-service\/",
+    "wordCount" : "511",
+    "keywords" : [ "typescript","grpc","microservices","Blog" ]
+}
+</script>
+
+    <title>Max Prettyjohns</title>
+</head>
+<body><header>
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/">Max Prettyjohns</a>
+          <a role="button" aria-label="burger menu" id="nav-toggle" class="navbar-burger burger" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <script type="text/javascript">
+            document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+            function toggleNav() {
+              var nav = document.getElementById("nav-menu");
+              var className = nav.getAttribute("class");
+              if(className == "nav-right nav-menu") {
+                  nav.className = "navbar-menu";
+              } else {
+                  nav.className = "nav-right nav-menu";
+              }
+            }
+          </script>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/posts">Posts</a>
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/projects">Projects</a>
+        </div>
+      </div>
+    </nav>
+</header>
+<div id="content">
+<div>
+  <h2 class="section title is-2">Typescript Grpc Service</h3>
+  <span class="section">2019-11-10 | <a href="https://ma.xprettyjohns.com/posts/typescript-grpc-service/">permalink</a></span>
+  <article class="section">
+  <p>This weekend I thought I would play with typescript and GRPC a little. It seems docs on getting this up and running is a bit thin on the ground, so that makes it perfect candidate for a little blog post.</p>
+
+<p>You can find example code <a href="https://github.com/quorauk/grpc-typescript-example">here</a></p>
+
+<p>To get started we need to create project, do so with the following commands</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir grpc-project
+yarn init
+mkdir -p src/proto
+yarn add typescript ts-node grpc grpc-tools ts-protoc-gen @grpc/proto-loader</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>now we will want to create a protoc service so we can do some tasty code generation, here is an example proto file to get started</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#75715e">// service.proto
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>syntax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;proto3&#34;</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">Message</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">message</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">service</span> Greeter {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">rpc</span> greet (Message) <span style="color:#66d9ef">returns</span> (Message) {}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>sweet, now we want to get a little typescript going, to do this we want a tsconfig.json file so the compiler knows how to compile your code.</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">tsconfig.json</span>
+{
+    <span style="color:#f92672">&#34;compilerOptions&#34;</span>: {
+        <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;es6&#34;</span>,
+        <span style="color:#f92672">&#34;module&#34;</span>: <span style="color:#e6db74">&#34;commonjs&#34;</span>,
+        <span style="color:#f92672">&#34;noImplicitAny&#34;</span>: <span style="color:#66d9ef">true</span>,
+        <span style="color:#f92672">&#34;removeComments&#34;</span>: <span style="color:#66d9ef">true</span>,
+        <span style="color:#f92672">&#34;preserveConstEnums&#34;</span>: <span style="color:#66d9ef">true</span>,
+        <span style="color:#f92672">&#34;sourceMap&#34;</span>: <span style="color:#66d9ef">true</span>
+    }
+}</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>then we want to generate the code that will help us use this proto file in our typescript code. Add the following to package.json</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<span style="color:#960050;background-color:#1e0010">...</span>
+    <span style="color:#f92672">&#34;scripts&#34;</span>: {
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;grpc_tools_node_protoc --plugin=protoc-gen-grpc=./node_modules/.bin/grpc_tools_node_protoc_plugin --plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts -I . ./service.proto --js_out=&#39;import_style=commonjs,binary:src/proto&#39; --grpc_out=src/proto --ts_out=&#39;service=grpc-node:src/proto&#39;&#34;</span>
+    }
+<span style="color:#960050;background-color:#1e0010">...</span>
+}</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>now you can run the code generation using</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn proto</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>and you should see the code appear in src/proto/</p>
+
+<p>now we want to write our server code, here is an example to get you started</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#75715e">// src/index.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_pb&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">grpc</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;grpc&#34;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GreeterService</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_grpc_pb&#34;</span>;
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">greet</span>(
+  <span style="color:#a6e22e">call</span>: <span style="color:#66d9ef">grpc.ServerUnaryCall</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>,
+  <span style="color:#a6e22e">callback</span>: <span style="color:#66d9ef">grpc.requestCallback</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>
+) {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Message</span>();
+  <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">setMessage</span>(<span style="color:#e6db74">`hello </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">call</span>.<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">getMessage</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">resp</span>);
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>();
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">addService</span>(<span style="color:#a6e22e">GreeterService</span>, {
+    <span style="color:#a6e22e">greet</span>: <span style="color:#66d9ef">greet</span>
+  });
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bindto</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`0.0.0.0:50051`</span>;
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#a6e22e">bindto</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ServerCredentials</span>.<span style="color:#a6e22e">createInsecure</span>());
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`STARTING SERVER ON </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">bindto</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">start</span>();
+}
+
+<span style="color:#a6e22e">main</span>();
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>we can run this with</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn run ts-node src/index.ts</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>and to create a basic client</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#75715e">// src/client.ts
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_pb&#34;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">grpc</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;grpc&#34;</span>;
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GreeterService</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_grpc_pb&#34;</span>;
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">greet</span>(
+  <span style="color:#a6e22e">call</span>: <span style="color:#66d9ef">grpc.ServerUnaryCall</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>,
+  <span style="color:#a6e22e">callback</span>: <span style="color:#66d9ef">grpc.requestCallback</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>
+) {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Message</span>();
+  <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">setMessage</span>(<span style="color:#e6db74">`hello </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">call</span>.<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">getMessage</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">resp</span>);
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>();
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">addService</span>(<span style="color:#a6e22e">GreeterService</span>, {
+    <span style="color:#a6e22e">greet</span>: <span style="color:#66d9ef">greet</span>
+  });
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bindto</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`0.0.0.0:50051`</span>;
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#a6e22e">bindto</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ServerCredentials</span>.<span style="color:#a6e22e">createInsecure</span>());
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`STARTING SERVER ON </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">bindto</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">start</span>();
+}
+
+<span style="color:#a6e22e">main</span>();
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>similarly run this in a separate terminal with</p>
+
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yarn run ts-node src/client.ts
+yarn run v1.19.1
+$ /home/max/workspace/quora/grpc-typescript-example/node_modules/.bin/ts-node src/client.ts
+hello Max
+Done in <span style="color:#ae81ff">1</span>.03s.</code></pre></td></tr></table>
+</div>
+</div>
+
+<p>And there we have it, a basic grpc endpoint in typescript!</p>
+
+  </article>
+</div>
+
+      </div><footer class="footer">
+  <div class="content has-text-centered">
+    <a href="https://github.com/quorauk">Github</a>
+    <a href="https://www.linkedin.com/in/quorauk/">Linkedin</a>
+    |
+    Max Prettyjohns 2019
+    |
+    <a href="https://github.com/quorauk/terminal-dreams">Theme</a>
+  </div>
+</footer>
+</body>
+</html>

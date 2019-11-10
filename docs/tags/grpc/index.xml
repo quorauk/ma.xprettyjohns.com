@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>grpc on Max Prettyjohns</title>
+    <link>https://ma.xprettyjohns.com/tags/grpc/</link>
+    <description>Recent content in grpc on Max Prettyjohns</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 10 Nov 2019 00:28:18 +0000</lastBuildDate>
+    
+	<atom:link href="https://ma.xprettyjohns.com/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Typescript Grpc Service</title>
+      <link>https://ma.xprettyjohns.com/posts/typescript-grpc-service/</link>
+      <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/posts/typescript-grpc-service/</guid>
+      <description>This weekend I thought I would play with typescript and GRPC a little. It seems docs on getting this up and running is a bit thin on the ground, so that makes it perfect candidate for a little blog post.
+You can find example code here
+To get started we need to create project, do so with the following commands
+1 2 3 4  mkdir grpc-project yarn init mkdir -p src/proto yarn add typescript ts-node grpc grpc-tools ts-protoc-gen @grpc/proto-loader   now we will want to create a protoc service so we can do some tasty code generation, here is an example proto file to get started</description>
+    </item>
+    
+  </channel>
+</rss>
