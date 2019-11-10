@@ -25,7 +25,7 @@
     "datePublished": "2019-11-10 00:28:18 \x2b0000 UTC",
     "dateModified" : "2019-11-10 00:28:18 \x2b0000 UTC",
     "url" : "https:\/\/ma.xprettyjohns.com\/posts\/typescript-grpc-service\/",
-    "wordCount" : "511",
+    "wordCount" : "499",
     "keywords" : [ "typescript","grpc","microservices","Blog" ]
 }
 </script>
@@ -285,35 +285,27 @@ yarn add typescript ts-node grpc grpc-tools ts-protoc-gen @grpc/proto-loader</co
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-typescript" data-lang="typescript"><span style="color:#75715e">// src/client.ts
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">Message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_pb&#34;</span>;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">message</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_pb&#34;</span>;
 <span style="color:#66d9ef">import</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">grpc</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;grpc&#34;</span>;
-<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">GreeterService</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_grpc_pb&#34;</span>;
-
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">greet</span>(
-  <span style="color:#a6e22e">call</span>: <span style="color:#66d9ef">grpc.ServerUnaryCall</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>,
-  <span style="color:#a6e22e">callback</span>: <span style="color:#66d9ef">grpc.requestCallback</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Message</span><span style="color:#f92672">&gt;</span>
-) {
-  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resp</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Message</span>();
-  <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">setMessage</span>(<span style="color:#e6db74">`hello </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">call</span>.<span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">getMessage</span>()<span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-  <span style="color:#a6e22e">callback</span>(<span style="color:#66d9ef">null</span>, <span style="color:#a6e22e">resp</span>);
-}
+<span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">greeterclient</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./proto/service_grpc_pb&#34;</span>;
 
 <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main() {</span>
-  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">server</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">Server</span>();
-  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">addService</span>(<span style="color:#a6e22e">GreeterService</span>, {
-    <span style="color:#a6e22e">greet</span>: <span style="color:#66d9ef">greet</span>
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">client</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">greeterclient</span>(
+    <span style="color:#e6db74">&#34;0.0.0.0:50051&#34;</span>,
+    <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">credentials</span>.<span style="color:#a6e22e">createinsecure</span>()
+  );
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">request</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">message</span>();
+  <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">setmessage</span>(<span style="color:#e6db74">&#34;max&#34;</span>);
+  <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">greet</span>(<span style="color:#a6e22e">request</span>, (<span style="color:#a6e22e">error</span>: <span style="color:#66d9ef">grpc.serviceerror</span>, <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">message</span>) <span style="color:#f92672">=&gt;</span> {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">error</span>);
+        <span style="color:#66d9ef">return</span>
+    }
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">getmessage</span>());
   });
-  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bindto</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`0.0.0.0:50051`</span>;
-  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#a6e22e">bindto</span>, <span style="color:#a6e22e">grpc</span>.<span style="color:#a6e22e">ServerCredentials</span>.<span style="color:#a6e22e">createInsecure</span>());
-  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`STARTING SERVER ON </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">bindto</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
-  <span style="color:#a6e22e">server</span>.<span style="color:#a6e22e">start</span>();
 }
 
 <span style="color:#a6e22e">main</span>();

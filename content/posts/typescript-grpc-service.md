@@ -113,28 +113,24 @@ and to create a basic client
 
 {{< highlight typescript "linenos=table" >}}
 // src/client.ts
-import { Message } from "./proto/service_pb";
+import { message } from "./proto/service_pb";
 import * as grpc from "grpc";
-import { GreeterService } from "./proto/service_grpc_pb";
-
-function greet(
-  call: grpc.ServerUnaryCall<Message>,
-  callback: grpc.requestCallback<Message>
-) {
-  const resp = new Message();
-  resp.setMessage(`hello ${call.request.getMessage()}`);
-  callback(null, resp);
-}
+import { greeterclient } from "./proto/service_grpc_pb";
 
 function main() {
-  const server = new grpc.Server();
-  server.addService(GreeterService, {
-    greet: greet
+  const client = new greeterclient(
+    "0.0.0.0:50051",
+    grpc.credentials.createinsecure()
+  );
+  const request = new message();
+  request.setmessage("max");
+  client.greet(request, (error: grpc.serviceerror, value: message) => {
+    if (error != null) {
+        console.log(error);
+        return
+    }
+    console.log(value.getmessage());
   });
-  const bindto = `0.0.0.0:50051`;
-  server.bind(bindto, grpc.ServerCredentials.createInsecure());
-  console.log(`STARTING SERVER ON ${bindto}`);
-  server.start();
 }
 
 main();
