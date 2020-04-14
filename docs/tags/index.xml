@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Max Prettyjohns</title>
@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>grpc</title>
+      <title>Grpc</title>
       <link>https://ma.xprettyjohns.com/tags/grpc/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -21,7 +21,7 @@
     </item>
     
     <item>
-      <title>microservices</title>
+      <title>Microservices</title>
       <link>https://ma.xprettyjohns.com/tags/microservices/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -30,7 +30,7 @@
     </item>
     
     <item>
-      <title>typescript</title>
+      <title>Typescript</title>
       <link>https://ma.xprettyjohns.com/tags/typescript/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -39,7 +39,7 @@
     </item>
     
     <item>
-      <title>VMU</title>
+      <title>Vmu</title>
       <link>https://ma.xprettyjohns.com/tags/vmu/</link>
       <pubDate>Sat, 22 Jun 2019 00:22:03 +0100</pubDate>
       
