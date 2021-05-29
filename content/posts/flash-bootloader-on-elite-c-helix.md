@@ -1,7 +1,10 @@
 ---
 title: "Flash Elite C bootloader on Helix Keyboard"
 date: 2021-05-30T00:22:27+01:00
-draft: true
+tags:
+  - Arduino
+  - Elite C
+  - Keyboards
 ---
 
 I've been running a Helix keyboard as my daily driver for the last year and have been loving it so far, unfortunately for the last couple of months I've had a bootloader issue that mean't I could no longer flash the firmware and customise the keymap. A lot of the guidance wasn't super useful on this but I managed to stumble my way into a solution which may help others in the same situation.

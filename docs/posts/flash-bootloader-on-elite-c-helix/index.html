@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-63824506-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-63824506-1');
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Homepage for Max Prettyjohns.">
+    <link href="https://ma.xprettyjohns.com/css/mystyles.css" type="text/css" rel="stylesheet">
+    </link>
+    <script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/ma.xprettyjohns.com\/posts\/flash-bootloader-on-elite-c-helix\/"
+    },
+    "articleSection" : "posts",
+    "name" : "Flash Elite C bootloader on Helix Keyboard",
+    "headline" : "Flash Elite C bootloader on Helix Keyboard",
+    "description" : "I\u0026rsquo;ve been running a Helix keyboard as my daily driver for the last year and have been loving it so far, unfortunately for the last couple of months I\u0026rsquo;ve had a bootloader issue that mean\u0026rsquo;t I could no longer flash the firmware and customise the keymap. A lot of the guidance wasn\u0026rsquo;t super useful on this but I managed to stumble my way into a solution which may help others in the same situation.",
+    "inLanguage" : "en-US",
+    "author" : "Max Prettyjohns",
+    "creator" : "Max Prettyjohns",
+    "publisher": "Max Prettyjohns",
+    "accountablePerson" : "Max Prettyjohns",
+    "copyrightHolder" : "Max Prettyjohns",
+    "copyrightYear" : "2021-05-30",
+    "datePublished": "2021-05-30",
+    "dateModified" : "2021-05-30",
+    "url" : "https:\/\/ma.xprettyjohns.com\/posts\/flash-bootloader-on-elite-c-helix\/",
+    "wordCount" : "362",
+    "keywords" : [ "Arduino","Elite C","Keyboards","Blog" ]
+}
+</script>
+    <title>Max Prettyjohns</title>
+</head><body>
+  <div class="container"><header>
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/">Max Prettyjohns</a>
+          <a role="button" aria-label="burger menu" id="nav-toggle" class="navbar-burger burger" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <script type="text/javascript">
+            document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+            function toggleNav() {
+              var nav = document.getElementById("nav-menu");
+              var className = nav.getAttribute("class");
+              if(className == "nav-right nav-menu") {
+                  nav.className = "navbar-menu";
+              } else {
+                  nav.className = "nav-right nav-menu";
+              }
+            }
+          </script>
+      </div>
+      <div id="nav-menu" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/posts">Posts</a>
+          <a class="navbar-item" href="https://ma.xprettyjohns.com/projects">Projects</a>
+        </div>
+      </div>
+    </nav>
+</header>
+</div>
+  <div id="content" class="container">
+<div>
+  <h2 class="section title is-2">Flash Elite C bootloader on Helix Keyboard</h3>
+  <span class="section">2021-05-30 | <a href="https://ma.xprettyjohns.com/posts/flash-bootloader-on-elite-c-helix/">permalink</a></span>
+  <article class="section">
+  <p>I&rsquo;ve been running a Helix keyboard as my daily driver for the last year and have been loving it so far, unfortunately for the last couple of months I&rsquo;ve had a bootloader issue that mean&rsquo;t I could no longer flash the firmware and customise the keymap. A lot of the guidance wasn&rsquo;t super useful on this but I managed to stumble my way into a solution which may help others in the same situation.</p>
+<p>For reference I&rsquo;m using Elite-C v3 on the helix board purchased from mechboards.co.uk around april of 2020</p>
+<p>I would get the following error message when trying to run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bash -&gt; qmk flash
+...
+Bootloader Version: 0x00 <span style="color:#f92672">(</span>0<span style="color:#f92672">)</span>
+Erasing flash...  Success
+Checking memory from 0x0 to 0x6FFF...  Not blank at 0x1.
+0%                            100%  Programming 0x5F00 bytes...
+<span style="color:#f92672">[</span>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span style="color:#f92672">]</span>  Success
+0%                            100%  Reading 0x7000 bytes...
+<span style="color:#f92672">[</span>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span style="color:#f92672">]</span>  Success
+Validating...  ERROR
+<span style="color:#ae81ff">24231</span> invalid bytes in program region, <span style="color:#ae81ff">4335</span> outside region.
+FAIL
+Memory did not validate. Did you erase?</code></pre></div>
+<p>Most posts in github issues and stack overflow suggested that the bootloader was corrupted and would need to be reflashed, I found this guide <a href="https://beta.docs.qmk.fm/using-qmk/guides/keyboard-building/isp_flashing_guide">https://beta.docs.qmk.fm/using-qmk/guides/keyboard-building/isp_flashing_guide</a> on QMK which was moderately helpful but didn&rsquo;t work for me as I used a arduino UNO as an isp flash tool and this didn&rsquo;t show up in qmk toolbox.</p>
+<p>This did help me figure out some keywords I needed though, I also noticed the acronym ICSP was on my helix board with some bare bins for soldering a header to.</p>
+<p><img src="https://ma.xprettyjohns.com/helix-icsp.jpg" alt="Image of helix keyboard displaying ICSP silkscreen on board"></p>
+<p>I found the pinout of the ICSP header using a multimeter and the pinout I found on <a href="https://deskthority.net/wiki/Elite-C#Pinout">Deskthority</a>. The right side of the board had the following ICSP pinout tested using a multimeter.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">RIGHT SIDE OF HELIX, WHEN VIEWED FROM THE FRONT
+
+MISO SCLK RESET
+VCC MOSI GROUND</code></pre></div>
+<p>I could then use an ISP <a href="https://schou.dk/linux/arduino/isp/">flashing guide</a> to find the matching pins on an arduino UNO and burn a new bootloader onto the board.</p>
+<p>Something to additionally note is that you may have to change your qmk firmware to use caterina instead of dfu-programmer. In rules.mk</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">#BOOTLOADER = dfu-programmer
+</span><span style="color:#75715e"></span>BOOTLOADER <span style="color:#f92672">=</span> caterina</code></pre></div>
+<p>Then flash your keyboard again using qmk flash and you should be back up and running once again</p>
+
+  </article>
+</div>
+
+  </div><footer class="footer">
+  <div class="content has-text-centered">
+    <a href="https://github.com/quorauk">Github</a> |
+    <a href="https://twitter.com/MaxPrettyjohns">Twitter</a> |
+    <a href="https://www.linkedin.com/in/quorauk/">Linkedin</a>
+    |
+    Max Prettyjohns 2021
+    |
+    <a href="https://github.com/quorauk/terminal-dreams">Theme</a>
+  </div>
+</footer>
+</body>
+
+</html>

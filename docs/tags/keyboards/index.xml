@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Keyboards on Max Prettyjohns</title>
+    <link>https://ma.xprettyjohns.com/tags/keyboards/</link>
+    <description>Recent content in Keyboards on Max Prettyjohns</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 30 May 2021 00:22:27 +0100</lastBuildDate><atom:link href="https://ma.xprettyjohns.com/tags/keyboards/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Flash Elite C bootloader on Helix Keyboard</title>
+      <link>https://ma.xprettyjohns.com/posts/flash-bootloader-on-elite-c-helix/</link>
+      <pubDate>Sun, 30 May 2021 00:22:27 +0100</pubDate>
+      
+      <guid>https://ma.xprettyjohns.com/posts/flash-bootloader-on-elite-c-helix/</guid>
+      <description>I&amp;rsquo;ve been running a Helix keyboard as my daily driver for the last year and have been loving it so far, unfortunately for the last couple of months I&amp;rsquo;ve had a bootloader issue that mean&amp;rsquo;t I could no longer flash the firmware and customise the keymap. A lot of the guidance wasn&amp;rsquo;t super useful on this but I managed to stumble my way into a solution which may help others in the same situation.</description>
+    </item>
+    
+  </channel>
+</rss>
