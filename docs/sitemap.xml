@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://ma.xprettyjohns.com/</loc>
+    <lastmod>2021-05-30T00:46:00+01:00</lastmod>
+  </url><url>
     <loc>https://ma.xprettyjohns.com/tags/grpc/</loc>
     <lastmod>2019-11-10T00:28:18+00:00</lastmod>
   </url><url>
@@ -28,9 +31,6 @@
   </url><url>
     <loc>https://ma.xprettyjohns.com/tags/vmu/</loc>
     <lastmod>2019-06-22T00:22:03+01:00</lastmod>
-  </url><url>
-    <loc>https://ma.xprettyjohns.com/</loc>
-    <lastmod>2019-06-21T19:59:53+01:00</lastmod>
   </url><url>
     <loc>https://ma.xprettyjohns.com/categories/</loc>
   </url><url>
