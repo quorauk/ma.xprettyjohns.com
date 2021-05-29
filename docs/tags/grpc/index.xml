@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>grpc on Max Prettyjohns</title>
+    <title>Grpc on Max Prettyjohns</title>
     <link>https://ma.xprettyjohns.com/tags/grpc/</link>
-    <description>Recent content in grpc on Max Prettyjohns</description>
+    <description>Recent content in Grpc on Max Prettyjohns</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 10 Nov 2019 00:28:18 +0000</lastBuildDate><atom:link href="https://ma.xprettyjohns.com/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Nov 2019 00:28:18 +0000</lastBuildDate>
+    
+	<atom:link href="https://ma.xprettyjohns.com/tags/grpc/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>Typescript Grpc Service</title>
       <link>https://ma.xprettyjohns.com/posts/typescript-grpc-service/</link>
