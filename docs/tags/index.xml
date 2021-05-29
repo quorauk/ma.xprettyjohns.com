@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Max Prettyjohns</title>
@@ -6,13 +6,9 @@
     <description>Recent content in Tags on Max Prettyjohns</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 10 Nov 2019 00:28:18 +0000</lastBuildDate>
-    
-	<atom:link href="https://ma.xprettyjohns.com/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 10 Nov 2019 00:28:18 +0000</lastBuildDate><atom:link href="https://ma.xprettyjohns.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Grpc</title>
+      <title>grpc</title>
       <link>https://ma.xprettyjohns.com/tags/grpc/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -21,7 +17,7 @@
     </item>
     
     <item>
-      <title>Microservices</title>
+      <title>microservices</title>
       <link>https://ma.xprettyjohns.com/tags/microservices/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -30,7 +26,7 @@
     </item>
     
     <item>
-      <title>Typescript</title>
+      <title>typescript</title>
       <link>https://ma.xprettyjohns.com/tags/typescript/</link>
       <pubDate>Sun, 10 Nov 2019 00:28:18 +0000</pubDate>
       
@@ -39,7 +35,7 @@
     </item>
     
     <item>
-      <title>Vmu</title>
+      <title>VMU</title>
       <link>https://ma.xprettyjohns.com/tags/vmu/</link>
       <pubDate>Sat, 22 Jun 2019 00:22:03 +0100</pubDate>
       
